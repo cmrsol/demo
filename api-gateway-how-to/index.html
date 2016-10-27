@@ -1,0 +1,66 @@
+<html lang="en">
+  <head>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="112507192446-oqsjnkn7888m0j0s7ipf7qjbt1kvg7sg.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="text/javascript">
+       function postData() {
+          var thingy;
+          var endpoint;
+
+          console.log("postData(): called");
+          if (window.XMLHttpRequest) {
+              xhttp=new XMLHttpRequest();
+              console.log("postData(): able to POST with modern methods");
+          } else {
+              console.log("postData(): is not right");
+              return;
+          }
+
+          xhttp.onreadystatechange = function() {
+              if (xhttp.readyState == 4 && xhttp.status == 200) {
+                  console.log("response text: " + xhttp.responseText);
+              }
+          };
+
+
+          thingy = new Object();
+          endpoint = document.getElementById('endpoint').value
+          thingy.url_name = document.getElementById('url_name').value
+          thingy.url = document.getElementById('url').value
+          theData = JSON.stringify(thingy);
+          alert(endpoint);
+          xhttp.open("POST", endpoint, true);
+          xhttp.setRequestHeader("Content-type", "application/json");
+          xhttp.send(theData);
+       }
+    </script>
+  </head>
+  <body>
+    <div id="message"></div><br>
+    <form id="the_form">
+       <table>
+         <tr>
+           <td align="right">
+           <strong>API Endpoint:</strong>
+           </td>
+           <td><input type="text" id="endpoint" size="64" value="https://3mdl7gsd07.execute-api.us-west-2.amazonaws.com/v0/url" /></td>
+         </tr>
+         <tr>
+           <td align="right">
+           <strong>URL:</strong>
+           </td>
+           <td><input type="text" id="url" size="64" /></td>
+         </tr>
+         <tr>
+           <td align="right">
+           <strong>URL Name:</strong>
+           </td>
+           <td><input type="text" id="url_name" size="64" /></td>
+         </tr>
+       </table>
+       <p> <button type="button" onclick="postData();">Record URL</button> </p>
+    </form>
+  </body>
+</html>
+
