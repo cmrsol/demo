@@ -1,14 +1,14 @@
 <html lang="en">
   <head>
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="112507192446-oqsjnkn7888m0j0s7ipf7qjbt1kvg7sg.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script type="text/javascript">
        function postData() {
           var thingy;
+          var r;
+          var wrk;
           var endpoint;
 
           console.log("postData(): called");
+          document.getElementById('message').innerHTML = 'message: waiting';
           if (window.XMLHttpRequest) {
               xhttp=new XMLHttpRequest();
               console.log("postData(): able to POST with modern methods");
@@ -20,6 +20,8 @@
           xhttp.onreadystatechange = function() {
               if (xhttp.readyState == 4 && xhttp.status == 200) {
                   console.log("response text: " + xhttp.responseText);
+                  r = JSON.parse(xhttp.responseText);
+                  document.getElementById('message').innerHTML = 'message: ' + r.message;
               }
           };
 
@@ -29,7 +31,6 @@
           thingy.url_name = document.getElementById('url_name').value
           thingy.url = document.getElementById('url').value
           theData = JSON.stringify(thingy);
-          alert(endpoint);
           xhttp.open("POST", endpoint, true);
           xhttp.setRequestHeader("Content-type", "application/json");
           xhttp.send(theData);
@@ -37,14 +38,14 @@
     </script>
   </head>
   <body>
-    <div id="message"></div><br>
+    <div id="message">message: nothing to report yet</div><br>
     <form id="the_form">
        <table>
          <tr>
            <td align="right">
            <strong>API Endpoint:</strong>
            </td>
-           <td><input type="text" id="endpoint" size="64" value="https://3mdl7gsd07.execute-api.us-west-2.amazonaws.com/v0/url" /></td>
+           <td><input type="text" id="endpoint" size="64" value="" /></td>
          </tr>
          <tr>
            <td align="right">
