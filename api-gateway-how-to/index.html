@@ -7,19 +7,19 @@
           var wrk;
           var endpoint;
 
-          console.log("postData(): called");
+          console.log('postData(): called');
           document.getElementById('message').innerHTML = 'message: waiting';
           if (window.XMLHttpRequest) {
               xhttp=new XMLHttpRequest();
-              console.log("postData(): able to POST with modern methods");
+              console.log('postData(): able to POST with modern methods');
           } else {
-              console.log("postData(): is not right");
+              console.log('postData(): is not right');
               return;
           }
 
           xhttp.onreadystatechange = function() {
               if (xhttp.readyState == 4 && xhttp.status == 200) {
-                  console.log("response text: " + xhttp.responseText);
+                  console.log('response text: ' + xhttp.responseText);
                   r = JSON.parse(xhttp.responseText);
                   document.getElementById('message').innerHTML = 'message: ' + r.message;
               }
@@ -31,8 +31,8 @@
           thingy.url_name = document.getElementById('url_name').value
           thingy.url = document.getElementById('url').value
           theData = JSON.stringify(thingy);
-          xhttp.open("POST", endpoint, true);
-          xhttp.setRequestHeader("Content-type", "application/json");
+          xhttp.open('POST', endpoint, true);
+          xhttp.setRequestHeader('Content-type', 'application/json');
           xhttp.send(theData);
        }
     </script>
