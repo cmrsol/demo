@@ -1,0 +1,146 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "IAM Role for the demo machines",
+    "Parameters": {
+        "managedPolicies": {
+            "Description": "List of managed policies",
+            "Type": "CommaDelimitedList"
+        },
+        "roleName": {
+            "Description": "The name of the role",
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "demoEC2Role": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [ "sts:AssumeRole" ],
+                            "Effect": "Allow",
+                            "Principal": {
+                                "AWS": {"Fn::Join": ["",
+                                            [
+                                                "arn:aws:iam::",
+                                                {"Ref": "AWS::AccountId"},
+                                                ":root"
+                                            ]
+                                        ]},
+                                "Service": "ec2.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "ManagedPolicyArns": { "Ref": "managedPolicies" },
+                "Policies": [
+                    {
+                        "PolicyDocument": {
+                            "Statement": [
+                                {
+                                    "Action": [ "sts:AssumeRole" ],
+                                    "Effect": "Allow",
+                                    "Resource": [
+                                        {"Fn::Join": ["", 
+                                            [
+                                                "arn:aws:iam::",
+                                                {"Ref": "AWS::AccountId"},
+                                                ":role/",
+                                                {"Ref": "roleName"}
+                                            ]
+                                        ]},
+                                        {"Fn::Join": ["", 
+                                            [
+                                                "arn:aws:sts::",
+                                                {"Ref": "AWS::AccountId"},
+                                                ":assumed-role/",
+                                                {"Ref": "roleName"},
+                                                "/assumeOwnRole"
+                                            ]
+                                        ]}
+                                    ]
+                                }
+                            ],
+                            "Version": "2012-10-17"
+                        },
+                        "PolicyName": "assume-self"
+                    },
+                    {
+                        "PolicyDocument": {
+                            "Statement": [
+                                {
+                                    "Action": [ 
+                                        "acm:RequestCertificate",
+                                        "acm:AddTagsToCertificate"
+                                    ],
+                                    "Effect": "Allow",
+                                    "Resource": "*"
+                                }
+                            ],
+                            "Version": "2012-10-17"
+                        },
+                        "PolicyName": "request-acm"
+                    },
+                    {
+                        "PolicyDocument": {
+                            "Statement": [
+                                {
+                                    "Action": [ 
+                                        "elasticache:*"
+                                    ],
+                                    "Effect": "Allow",
+                                    "Resource": "*"
+                                }
+                            ],
+                            "Version": "2012-10-17"
+                        },
+                        "PolicyName": "elastic-cache-perms"
+                    },
+                    {
+                        "PolicyDocument": {
+                            "Statement": [
+                                {
+                                    "Action": [ 
+                                        "iam:CreateRole",
+                                        "iam:DeleteRole",
+                                        "iam:PutRolePolicy",
+                                        "iam:CreateInstanceProfile",
+                                        "iam:AddRoleToInstanceProfile",
+                                        "iam:DeleteRolePolicy"
+                                    ],
+                                    "Effect": "Allow",
+                                    "Resource": "*"
+                                }
+                            ],
+                            "Version": "2012-10-17"
+                        },
+                        "PolicyName": "iam-perms"
+                    }
+                ],
+                "RoleName": {"Ref": "roleName"}
+            }
+        },
+        "demoEC2InstanceProfile": {
+            "Type": "AWS::IAM::InstanceProfile",
+            "DependsOn": "demoEC2Role",
+            "Properties": {
+                "Roles": [ {"Ref": "demoEC2Role"} ],
+                "InstanceProfileName": {"Ref": "roleName"}
+            }
+        }
+    },
+    "Outputs": {
+        "demoEC2Role": {
+            "Description": "The demo role",
+            "Value": { "Ref": "demoEC2Role" },
+            "Export": { "Name": "demoEC2RoleV1" }
+        },
+        "demoEC2InstanceProfile": {
+            "Description": "The demo instance profile",
+            "Value": { "Ref": "demoEC2InstanceProfile" },
+            "Export": { "Name": "demoEC2InstanceProfileV1" }
+        }
+    }
+}

@@ -1,0 +1,198 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Demonstration VPC",
+    "Parameters": {
+        "azOne": {
+            "Description": "The AZ for the first subnet",
+            "Type": "String"
+        },
+        "azTwo": {
+            "Description": "The AZ for the first subnet",
+            "Type": "String"
+        },
+        "IGWname": {
+            "Description": "The name of the internet gateway",
+            "Type": "String"
+        },
+        "routeTableName": {
+            "Description": "The name of the default route table",
+            "Type": "String"
+        },
+        "subnetCIDROne": {
+            "Description": "The CIDR block for subnet in first AZ",
+            "Type": "String"
+        },
+        "subnetCIDRTwo": {
+            "Description": "The CIDR block for subnet in second AZ",
+            "Type": "String"
+        },
+        "theCIDR": {
+            "Description": "The CIDR block of the VPC",
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "theVPC": {
+            "Type": "AWS::EC2::VPC",
+            "Metadata": {
+                "Comment": "Wait a second! I thought I could not comment in JSON...."
+            },
+            "Properties": {
+                "CidrBlock": {
+                    "Ref": "theCIDR"
+                },
+                "EnableDnsHostnames": "false",
+                "EnableDnsSupport": "true"
+            }
+        },
+        "theInternetGateway" : {
+            "Type" : "AWS::EC2::InternetGateway",
+            "Properties" : {
+            "Tags" : [ {"Key" : "Name", "Value" : {"Ref": "IGWname"}}]
+            }
+        },
+        "vpcIgwAssociation" : {
+            "Type" : "AWS::EC2::VPCGatewayAttachment",
+            "DependsOn": [
+                "theVPC",
+                "theInternetGateway"
+            ],
+            "Properties" : {
+                "VpcId" : { "Ref" : "theVPC" },
+                "InternetGatewayId" : { "Ref" : "theInternetGateway" }
+            }
+        },
+        "theRouteTable" : {
+            "Type" : "AWS::EC2::RouteTable",
+            "Properties" : {
+                "VpcId" : { "Ref" : "theVPC" },
+                "Tags" : [
+                    { "Key" : "Name", "Value" : {"Ref": "routeTableName"} }
+                ]
+            }
+        },
+        "routeToUncleAlsInternet": {
+            "Type": "AWS::EC2::Route",
+            "DependsOn": "vpcIgwAssociation",
+            "Properties": {
+                "RouteTableId": { "Ref": "theRouteTable" },
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "theInternetGateway"
+                }
+            }
+        },
+        "theSubnetOne": {
+            "Type": "AWS::EC2::Subnet",
+            "DependsOn": "theVPC",
+            "Properties": {
+                "AvailabilityZone": {"Ref": "azOne"},
+                "CidrBlock": {"Ref": "subnetCIDROne"},
+                "MapPublicIpOnLaunch": "false",
+                "VpcId": {
+                    "Ref": "theVPC"
+                }
+            }
+        },
+        "theSubnetTwo": {
+            "Type": "AWS::EC2::Subnet",
+            "DependsOn": "theVPC",
+            "Properties": {
+                "AvailabilityZone": {"Ref": "azTwo"},
+                "CidrBlock": {"Ref": "subnetCIDRTwo"},
+                "MapPublicIpOnLaunch": "false",
+                "VpcId": {
+                    "Ref": "theVPC"
+                }
+            }
+        },
+        "subnetOneRoute": {
+            "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+            "DependsOn": [
+                "theRouteTable",
+                "theSubnetOne"
+            ],
+            "Properties" : {
+                "RouteTableId" : {"Ref": "theRouteTable"},
+                "SubnetId" : {"Ref": "theSubnetOne"}
+            }
+        },
+        "subnetTwoRoute": {
+            "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+            "DependsOn": [
+                "theRouteTable",
+                "theSubnetTwo"
+            ],
+            "Properties" : {
+                "RouteTableId" : {"Ref": "theRouteTable"},
+                "SubnetId" : {"Ref": "theSubnetTwo"}
+            }
+        },
+        "theSshSecurityGroup" : {
+            "Type" : "AWS::EC2::SecurityGroup",
+            "Properties" : {
+                "GroupDescription" : "Allow ssh connections",
+                "GroupName" : "the-ssh",
+                "VpcId" : {"Ref" : "theVPC"},
+                "SecurityGroupIngress" : [{
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "0.0.0.0/0"
+                }],
+                "SecurityGroupEgress" : [{
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "1",
+                    "ToPort" : "65535",
+                    "CidrIp" : "0.0.0.0/0"
+                }]
+            }
+        },
+        "theSshSecurityGroupIngress": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "theSshSecurityGroup"
+                },
+                "IpProtocol": "-1",
+                "FromPort": "-1",
+                "ToPort": "-1",
+                "SourceSecurityGroupId": {
+                    "Ref": "theSshSecurityGroup"
+                }
+            }
+        }
+    },
+    "Outputs": {
+        "theVPC": {
+            "Description": "The the VPC",
+            "Value": {"Ref": "theVPC"},
+            "Export": {"Name": "theVPCV1"}
+        },
+        "theSshSecurityGroup": {
+            "Description": "The the SG that allows ssh inbound",
+            "Value": {"Ref": "theSshSecurityGroup"},
+            "Export": {"Name": "theSshSecurityGroupV1"}
+        },
+        "theSubnetOne": {
+            "Description": "The first the subnet",
+            "Value": {"Ref": "theSubnetOne"},
+            "Export": {"Name": "theSubnetOneV1"}
+        },
+        "theSubnetTwo": {
+            "Description": "The second the subnet",
+            "Value": {"Ref": "theSubnetTwo"},
+            "Export": {"Name": "theSubnetTwoV1"}
+        },
+        "theRouteTable": {
+            "Description": "The route table for the public subnets of the the VPC",
+            "Value": {"Ref": "theRouteTable"},
+            "Export": {"Name": "theRouteTableV1"}
+        },
+        "theVPCCidr": {
+            "Description": "The VPC CIDR block for the VPC",
+            "Value": {"Ref": "theCIDR"},
+            "Export": {"Name": "theVPCCidrV1"}
+        }
+    }
+}

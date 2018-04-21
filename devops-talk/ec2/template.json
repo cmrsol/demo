@@ -1,0 +1,74 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "SSH machine to get into the network",
+    "Parameters": {
+        "ec2Key": {
+            "Default": "secret",
+            "Description": "The ec2 key for the default user",
+            "Type": "String"
+        },
+        "instanceType": {
+            "Default": "t2.nano",
+            "Description": "The size of the instance",
+            "Type": "String"
+        },
+        "machineImage": {
+            "Description": "The AMI for the SSH host",
+            "Type": "String"
+        },
+        "machineName": {
+            "Default": "fred",
+            "Description": "The name of the ssh host",
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "demoSSH" : {
+            "Type" : "AWS::EC2::Instance",
+            "Properties" : {
+                "ImageId" : {"Ref": "machineImage"},
+                "KeyName" : {"Ref": "ec2Key"},
+                "SubnetId": {"Fn::ImportValue": "theSubnetOneV1"},
+                "IamInstanceProfile": {"Fn::ImportValue": "demoEC2InstanceProfileV1"},
+                "SecurityGroupIds": [{"Fn::ImportValue": "theSshSecurityGroupV1"}],
+                "InstanceType": {"Ref": "instanceType"},
+                "Tags" : [{"Key" : "Name", "Value" : {"Ref": "machineName"}}],
+                "BlockDeviceMappings" : [{
+                    "DeviceName" : "/dev/sda1",
+                    "Ebs" : { "VolumeSize" : "32" }
+                }],
+                "UserData": {
+                    "Fn::Base64" : { "Fn::Join" : ["", [
+                    "#!/bin/bash\n",
+                    "apt-get update\n",
+                    "apt-get -y install awscli\n",
+                    "apt-get -y python-pip\n",
+                    "pip install virtualenvwrapper\n"
+                    ]]}
+                }
+            }
+        },
+        "demoSSHaddress": {
+            "Type" : "AWS::EC2::EIP",
+            "Properties" : {
+                "Domain" : "vpc"
+            }
+        },
+        "demoSSHaddressAssoc": {
+            "Type": "AWS::EC2::EIPAssociation",
+            "DependsOn": [
+                "demoSSH",
+                "demoSSHaddress"
+            ],
+            "Properties": {
+                "AllocationId": {
+                    "Fn::GetAtt": [
+                        "demoSSHaddress",
+                        "AllocationId"
+                    ]
+                },
+                "InstanceId": {"Ref": "demoSSH"}
+            }
+        }
+    }
+}
