@@ -1,0 +1,62 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Stack for S3",
+    "Parameters": {
+        "bucketName": {
+            "Description": "Name of S3 bucket",
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "Bucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+                "AccessControl": "Private",
+                "BucketName": { "Ref": "bucketName" },
+                "VersioningConfiguration": { "Status": "Enabled" }
+            }
+        },
+        "S3BucketPolicy": {
+            "Type": "AWS::S3::BucketPolicy",
+            "Properties": {
+                "Bucket": { "Ref": "bucketName" },
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "s3:*",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "AWS": [
+                                { "Fn::Join": [ "", [ "arn:aws:iam::", { "Ref": "AWS::AccountId" }, ":root" ] ] },
+                                { "Fn::ImportValue": "demoEC2RoleArnV1" }
+                                ]
+                            },
+                            "Resource": [
+                                {
+                                    "Fn::Join": [
+                                        "",
+                                        [
+                                            "arn:aws:s3:::",
+                                            { "Ref": "bucketName" },
+                                            "/*"
+                                        ]
+                                    ]
+                                },
+                                {
+                                    "Fn::Join": [
+                                        "",
+                                        [
+                                            "arn:aws:s3:::",
+                                            { "Ref": "bucketName" }
+                                        ]
+                                    ]
+                                }
+                            ],
+                            "Sid": "WhitelistUsers-1524280684"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
