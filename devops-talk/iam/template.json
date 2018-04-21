@@ -28,7 +28,11 @@
                                                 ":root"
                                             ]
                                         ]},
-                                "Service": "ec2.amazonaws.com"
+                                "Service": [
+                                    "ec2.amazonaws.com",
+                                    "lambda.amazonaws.com",
+                                    "apigateway.amazonaws.com"
+                                ]
                             }
                         }
                     ],
@@ -136,6 +140,11 @@
             "Description": "The demo role",
             "Value": { "Ref": "demoEC2Role" },
             "Export": { "Name": "demoEC2RoleV1" }
+        },
+        "demoEC2RoleArn": {
+            "Description": "The demo role",
+            "Value": {"Fn::GetAtt" : ["demoEC2Role", "Arn"] },
+            "Export": { "Name": "demoEC2RoleArnV1" }
         },
         "demoEC2InstanceProfile": {
             "Description": "The demo instance profile",
