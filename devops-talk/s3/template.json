@@ -57,6 +57,29 @@
                     ]
                 }
             }
+        },
+        "demoS3Endpoint" : {
+            "Type" : "AWS::EC2::VPCEndpoint",
+            "DependsOn": "Bucket",
+            "Properties" : {
+                "PolicyDocument" : {
+                    "Version":"2012-10-17",
+                    "Statement":[{
+                        "Effect": "Allow",
+                        "Principal": "*",
+                        "Action": [
+                            "s3:*"
+                        ],
+                        "Resource": [
+                            { "Fn::Join": [ "", [ "arn:aws:s3:::", { "Ref": "bucketName" }, "/*" ] ] },
+                            { "Fn::Join": [ "", [ "arn:aws:s3:::", { "Ref": "bucketName" } ] ] }
+                        ]
+                    }]
+                },
+                "RouteTableIds" : [ {"Fn::ImportValue" : "theRouteTableV1"} ],
+                "ServiceName" : { "Fn::Join": [ "", [ "com.amazonaws.", { "Ref": "AWS::Region" }, ".s3" ] ] },
+                "VpcId" : {"Fn::ImportValue" : "theVPCV1"}
+            }
         }
     }
 }

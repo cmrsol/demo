@@ -107,6 +107,21 @@
                             "Statement": [
                                 {
                                     "Action": [ 
+                                        "cloudwatch:*"
+                                    ],
+                                    "Effect": "Allow",
+                                    "Resource": "*"
+                                }
+                            ],
+                            "Version": "2012-10-17"
+                        },
+                        "PolicyName": "cloudwatch-perms"
+                    },
+                    {
+                        "PolicyDocument": {
+                            "Statement": [
+                                {
+                                    "Action": [ 
                                         "iam:CreateRole",
                                         "iam:DeleteRole",
                                         "iam:PutRolePolicy",
