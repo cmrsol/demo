@@ -64,6 +64,37 @@ def handle_url():
     )
 
 
+@lambda_handler.route('/url/<key>', methods=['GET'])
+def handle_key(key):
+    '''
+    A contrived example function
+
+    Args:
+        key - S3 object key
+
+    Returns:
+        tuple of (body, status code, content type) that API Gateway understands
+    '''
+    try:
+        s3_file = s3_client.get_object(
+            Bucket=os.environ.get('bucket', None),
+            Key=key
+        )
+        the_url = s3_file['Body'].read()
+        return (
+            jump_html.format(the_url),
+            200,
+            {'Content-Type': 'text/html'}
+        )
+    except Exception as confusion:
+        print('Exception caught in read_the_layer_json(): {}'.format(confusion))
+        return (
+            '',
+            400,
+            {'Content-Type': 'text/json'}
+        )
+
+
 def store_shortened(key, url):
     try:
         s3_client.put_object(
