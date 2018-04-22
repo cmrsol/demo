@@ -1,0 +1,54 @@
+=== THE VPC ====================================================================================
+The following resources were created:
+Resource Type                          Logical ID                  Physical ID
+-------------------------------------  --------------------------  --------------------------
+AWS::EC2::Route                        routeToUncleAlsInternet     demo-route-Q0P0LUU9G94N
+AWS::EC2::SubnetRouteTableAssociation  subnetOneRoute              rtbassoc-38cd4853
+AWS::EC2::SubnetRouteTableAssociation  subnetTwoRoute              rtbassoc-97c144fc
+AWS::EC2::InternetGateway              theInternetGateway          igw-2038d348
+AWS::EC2::RouteTable                   theRouteTable               rtb-c7133eaf
+AWS::EC2::SecurityGroup                theSshSecurityGroup         sg-152c207e
+AWS::EC2::SecurityGroupIngress         theSshSecurityGroupIngress  theSshSecurityGroupIngress
+AWS::EC2::Subnet                       theSubnetOne                subnet-a65d3ace
+AWS::EC2::Subnet                       theSubnetTwo                subnet-d05a86aa
+AWS::EC2::VPC                          theVPC                      vpc-26dab44e
+AWS::EC2::VPCGatewayAttachment         vpcIgwAssociation           demo-vpcIg-NLHVL8LC2K3X
+
+=== THE IAM ROLES ==============================================================================
+The following resources were created:
+Resource Type              Logical ID              Physical ID
+-------------------------  ----------------------  -------------
+AWS::IAM::InstanceProfile  demoEC2InstanceProfile  demo-ec2-v1
+AWS::IAM::Role             demoEC2Role             demo-ec2-v1
+
+=== THE EC2 MACHINE ============================================================================
+------------------------  -------------------  -------------------
+AWS::EC2::Instance        demoSSH              i-0c80a4b61d875fdf9
+AWS::EC2::EIP             demoSSHaddress       13.58.204.15
+AWS::EC2::EIPAssociation  demoSSHaddressAssoc  eipassoc-7e855882
+
+=== THE APPLICATION SECURITY GROUP =============================================================
+The following resources were created:
+Resource Type                   Logical ID         Physical ID
+------------------------------  -----------------  ---------------------------------------------
+AWS::EC2::SecurityGroupEgress   demoGroupEgress    demo-default-sg-demoGroupEgress-10TF56ACCYZS2
+AWS::EC2::SecurityGroupIngress  demoGroupIngress   demoGroupIngress
+AWS::EC2::SecurityGroup         demoSecurityGroup  sg-d82d21b3
+
+=== THE S3 BUCKET TO HOLD THE DATA =============================================================
+The following resources were created:
+Resource Type          Logical ID      Physical ID
+---------------------  --------------  ------------------------------------------
+AWS::S3::Bucket        Bucket          cmrsol-devops-demo
+AWS::S3::BucketPolicy  S3BucketPolicy  demo-s3-bucket-S3BucketPolicy-A52M02QT7T2Q
+AWS::EC2::VPCEndpoint  demoS3Endpoint  vpce-e8de1a81
+
+=== THE API GATEWAY / LAMBDA FUNCTION ==========================================================
+The following resources were created:
+	AWS::Lambda::Permission	APIGPermission	demo-lambda-urltool-APIGPermission-MFFDG2C2Z1UF
+	AWS::Lambda::Function	LambdaFunction	urltool-demo
+	AWS::ApiGateway::RestApi	theAPI	o6ayofi9pb
+	AWS::ApiGateway::Deployment	theDeployment	6gu6gi
+
+The deployed service can be found at this URL:
+	https://o6ayofi9pb.execute-api.us-east-2.amazonaws.com/demo
