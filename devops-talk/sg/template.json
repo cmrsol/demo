@@ -1,0 +1,49 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "ECS ALB Group",
+    "Resources": {
+        "demoSecurityGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Allow connections from friends",
+                "GroupName": "demo-default",
+                "VpcId": {
+                    "Fn::ImportValue": "theVPCV1"
+                }
+            }
+        },
+        "demoGroupIngress": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "demoSecurityGroup"
+                },
+                "IpProtocol": "-1",
+                "FromPort": "-1",
+                "ToPort": "-1",
+                "SourceSecurityGroupId": {
+                    "Ref": "demoSecurityGroup"
+                }
+            }
+        },
+        "demoGroupEgress": {
+            "Type": "AWS::EC2::SecurityGroupEgress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "demoSecurityGroup"
+                },
+                "IpProtocol": "-1",
+                "FromPort": "-1",
+                "ToPort": "-1",
+                "CidrIp": "0.0.0.0/0"
+            }
+        }
+    },
+    "Outputs": {
+        "demoSecurityGroup": {
+            "Description": "Default VPC security group",
+            "Export": { "Name": "demoSecurityGroup" },
+            "Value": { "Ref": "demoSecurityGroup" }
+        }
+    }
+}
