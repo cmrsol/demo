@@ -40,9 +40,12 @@
                 "UserData": {
                     "Fn::Base64" : { "Fn::Join" : ["", [
                     "#!/bin/bash\n",
-                    "apt-get update\n",
-                    "apt-get -y install awscli\n",
-                    "apt-get -y python-pip\n",
+                    "apt update\n",
+                    "apt -y dist-upgrade\n",
+                    "apt -y install python-pip\n",
+                    "pip install -U \"pip<10\"\n",
+                    "pip install awscli\n",
+                    "pip install awslogs\n",
                     "pip install virtualenvwrapper\n"
                     ]]}
                 }
