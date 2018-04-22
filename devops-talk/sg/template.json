@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "ECS ALB Group",
+    "Description": "Demo Security Group",
     "Resources": {
         "demoSecurityGroup": {
             "Type": "AWS::EC2::SecurityGroup",
