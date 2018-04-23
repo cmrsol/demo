@@ -1,0 +1,23 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "An APIG Custom Domain",
+    "Parameters": {
+        "certHostName": {
+            "Description": "The name of the hosted zone",
+            "Type": "String"
+        },
+        "certARN": {
+            "Description": "The ARN of a cert in us-east-1",
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "labDomainName": {
+            "Type": "AWS::ApiGateway::DomainName",
+            "Properties": {
+                "DomainName": { "Ref": "certHostName" },
+                "CertificateArn": { "Ref": "certARN" }
+            }
+        }
+    }
+}
