@@ -1,5 +1,6 @@
 #### DevOps Overview (April 2018)
-See the slides for the presentation [here](https://github.com/cmrsol/demo/blob/master/devops-talk/presentation/DevOps-Overview.pdf).
+* See the slides for the presentation [here](https://github.com/cmrsol/demo/blob/master/devops-talk/presentation/DevOps-Overview.pdf).
+* Clone the [repo](https://github.com/cmrsol/demo.git)
 
 #### Setting up the sample application:
 * Get access to an AWS account where you have sufficient permissions to creaate VPC, IAM roles, S3 buckets etc.
