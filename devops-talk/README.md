@@ -33,3 +33,9 @@ time (cd sg; stackility upsert -i config.ini)
 time (cd s3; stackility upsert -i config.ini)
 time (cd lambda/urltool; lambdatool deploy -s demo -r us-east-2 --profile demo)
 ```
+
+#### Tools used:
+[Amazon Web Services](https://aws.amazon.com/)
+[Boto3](https://boto3.readthedocs.io/en/latest/)
+[Stackility](https://github.com/muckamuck/stackility)
+[LambdaTool](https://github.com/muckamuck/lambda-tool)
