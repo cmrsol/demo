@@ -1,8 +1,8 @@
 #### DevOps Overview (April 2018)
-To slides for the presentation are [here](https://github.com/cmrsol/demo/blob/master/devops-talk/presentation/DevOps-Overview.pdf)
+See the slides for the presentation are [here](https://github.com/cmrsol/demo/blob/master/devops-talk/presentation/DevOps-Overview.pdf)
 
 #### Setting up the sample application:
-* Get access to and AWS bucket with sufficient permissions to creaate VPC, IAM roles, S3 buckets etc.
+* Get access to an AWS account where you have sufficient permissions to creaate VPC, IAM roles, S3 buckets etc.
 * With the following command ```aws configure --profile demo``` set up a profile called ```demo```
 * Find (or create) an S3 bucket where CloudFormation templates can be stored. Change the ```environment.bucket``` value in the following files:
   * ```./extra/apig/config.ini```
@@ -19,7 +19,9 @@ To slides for the presentation are [here](https://github.com/cmrsol/demo/blob/ma
 NOTE: the sample application can only be created in a GNU/Linux environment.
 ```
 Execute the ```./demo.sh``` command
+
 -- OR --
+
 Run the following:
 ```
 food=$(date +%s); virtualenv /tmp/${food}; . /tmp/${food}/bin/activate
