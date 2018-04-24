@@ -1,5 +1,5 @@
 #### DevOps Overview (April 2018)
-See the slides for the presentation are [here](https://github.com/cmrsol/demo/blob/master/devops-talk/presentation/DevOps-Overview.pdf)
+See the slides for the presentation [here](https://github.com/cmrsol/demo/blob/master/devops-talk/presentation/DevOps-Overview.pdf).
 
 #### Setting up the sample application:
 * Get access to an AWS account where you have sufficient permissions to creaate VPC, IAM roles, S3 buckets etc.
@@ -35,7 +35,7 @@ time (cd lambda/urltool; lambdatool deploy -s demo -r us-east-2 --profile demo)
 ```
 
 #### Tools used:
-[Amazon Web Services](https://aws.amazon.com/)
-[Boto3](https://boto3.readthedocs.io/en/latest/)
-[Stackility](https://github.com/muckamuck/stackility)
-[LambdaTool](https://github.com/muckamuck/lambda-tool)
+* [Amazon Web Services](https://aws.amazon.com/)
+* [Boto3](https://boto3.readthedocs.io/en/latest/)
+* [Stackility](https://github.com/muckamuck/stackility)
+* [LambdaTool](https://github.com/muckamuck/lambda-tool)
