@@ -193,6 +193,11 @@
             "Description": "The VPC CIDR block for the VPC",
             "Value": {"Ref": "theCIDR"},
             "Export": {"Name": "theVPCCidrV1"}
+        },
+        "subnetCIDROne": {
+            "Description": "subnetCIDROne",
+            "Value": {"Ref": "subnetCIDROne"},
+            "Export": {"Name": "someRandomExport"}
         }
     }
 }

@@ -1,0 +1,209 @@
+== STARTING THE VIRTUAL ENVIROMENT =============================================
+New python executable in /tmp/1524488844/bin/python2
+Also creating executable in /tmp/1524488844/bin/python
+Installing setuptools, pkg_resources, pip, wheel...done.
+Running virtualenv with interpreter /usr/bin/python2
+Collecting stackility>=0.5 (from -r requirements.txt (line 1))
+  Using cached https://files.pythonhosted.org/packages/e8/62/4eac1420d8cbfdf978cf2a6b7440aa7ac51623f208e0f0a73673f0f4c8d8/Stackility-0.5.3-py2.py3-none-any.whl
+Collecting lambdatool>=0.3 (from -r requirements.txt (line 2))
+  Using cached https://files.pythonhosted.org/packages/53/7f/ad50a950df9b209476c80894a1cfc28de388b73e1d0f029c81ab801cff76/LambdaTool-0.4.0-py2.py3-none-any.whl
+Collecting tabulate>=0.8 (from stackility>=0.5->-r requirements.txt (line 1))
+Collecting jinja2 (from stackility>=0.5->-r requirements.txt (line 1))
+  Using cached https://files.pythonhosted.org/packages/7f/ff/ae64bacdfc95f27a016a7bed8e8686763ba4d277a78ca76f32659220a731/Jinja2-2.10-py2.py3-none-any.whl
+Collecting Click>=6.7 (from stackility>=0.5->-r requirements.txt (line 1))
+  Using cached https://files.pythonhosted.org/packages/34/c1/8806f99713ddb993c5366c362b2f908f18269f8d792aff1abfd700775a77/click-6.7-py2.py3-none-any.whl
+Collecting PyYAML>=3.12 (from stackility>=0.5->-r requirements.txt (line 1))
+Collecting pymongo>=3.4.0 (from stackility>=0.5->-r requirements.txt (line 1))
+  Using cached https://files.pythonhosted.org/packages/db/5a/77060da2196471c8c47eeed6526029bd35cb2f10b1e4fc0e5e5234ca1aa0/pymongo-3.6.1-cp27-cp27mu-manylinux1_x86_64.whl
+Collecting configparser (from stackility>=0.5->-r requirements.txt (line 1))
+Collecting boto3>=1.4.3 (from stackility>=0.5->-r requirements.txt (line 1))
+  Using cached https://files.pythonhosted.org/packages/be/f4/f31ab2238dbeaeade9b7fd73fa663c7443f01395e544915b1d47f9a3dbd2/boto3-1.7.6-py2.py3-none-any.whl
+Collecting GitPython>=2.1.7 (from lambdatool>=0.3->-r requirements.txt (line 2))
+  Using cached https://files.pythonhosted.org/packages/88/9c/b462dddb492204417f88d538b0931e87631f2a98afe89842929f4ed9ca5b/GitPython-2.1.9-py2.py3-none-any.whl
+Collecting Mako>=1.0.6 (from lambdatool>=0.3->-r requirements.txt (line 2))
+Collecting MarkupSafe>=0.23 (from jinja2->stackility>=0.5->-r requirements.txt (line 1))
+Collecting s3transfer<0.2.0,>=0.1.10 (from boto3>=1.4.3->stackility>=0.5->-r requirements.txt (line 1))
+  Using cached https://files.pythonhosted.org/packages/d7/14/2a0004d487464d120c9fb85313a75cd3d71a7506955be458eebfe19a6b1d/s3transfer-0.1.13-py2.py3-none-any.whl
+Collecting jmespath<1.0.0,>=0.7.1 (from boto3>=1.4.3->stackility>=0.5->-r requirements.txt (line 1))
+  Using cached https://files.pythonhosted.org/packages/b7/31/05c8d001f7f87f0f07289a5fc0fc3832e9a57f2dbd4d3b0fee70e0d51365/jmespath-0.9.3-py2.py3-none-any.whl
+Collecting botocore<1.11.0,>=1.10.6 (from boto3>=1.4.3->stackility>=0.5->-r requirements.txt (line 1))
+  Using cached https://files.pythonhosted.org/packages/bd/7b/c4436ba14adda753c77cccb11c9ea200ada0f44b8b10ff6b3247d2de5041/botocore-1.10.6-py2.py3-none-any.whl
+Collecting gitdb2>=2.0.0 (from GitPython>=2.1.7->lambdatool>=0.3->-r requirements.txt (line 2))
+  Using cached https://files.pythonhosted.org/packages/e0/95/c772c13b7c5740ec1a0924250e6defbf5dfdaee76a50d1c47f9c51f1cabb/gitdb2-2.0.3-py2.py3-none-any.whl
+Collecting futures<4.0.0,>=2.2.0; python_version == "2.6" or python_version == "2.7" (from s3transfer<0.2.0,>=0.1.10->boto3>=1.4.3->stackility>=0.5->-r requirements.txt (line 1))
+  Using cached https://files.pythonhosted.org/packages/2d/99/b2c4e9d5a30f6471e410a146232b4118e697fa3ffc06d6a65efde84debd0/futures-3.2.0-py2-none-any.whl
+Collecting python-dateutil<3.0.0,>=2.1; python_version >= "2.7" (from botocore<1.11.0,>=1.10.6->boto3>=1.4.3->stackility>=0.5->-r requirements.txt (line 1))
+  Using cached https://files.pythonhosted.org/packages/0c/57/19f3a65bcf6d5be570ee8c35a5398496e10a0ddcbc95393b2d17f86aaaf8/python_dateutil-2.7.2-py2.py3-none-any.whl
+Collecting docutils>=0.10 (from botocore<1.11.0,>=1.10.6->boto3>=1.4.3->stackility>=0.5->-r requirements.txt (line 1))
+  Using cached https://files.pythonhosted.org/packages/50/09/c53398e0005b11f7ffb27b7aa720c617aba53be4fb4f4f3f06b9b5c60f28/docutils-0.14-py2-none-any.whl
+Collecting smmap2>=2.0.0 (from gitdb2>=2.0.0->GitPython>=2.1.7->lambdatool>=0.3->-r requirements.txt (line 2))
+  Using cached https://files.pythonhosted.org/packages/e3/59/4e22f692e65f5f9271252a8e63f04ce4ad561d4e06192478ee48dfac9611/smmap2-2.0.3-py2.py3-none-any.whl
+Collecting six>=1.5 (from python-dateutil<3.0.0,>=2.1; python_version >= "2.7"->botocore<1.11.0,>=1.10.6->boto3>=1.4.3->stackility>=0.5->-r requirements.txt (line 1))
+  Using cached https://files.pythonhosted.org/packages/67/4b/141a581104b1f6397bfa78ac9d43d8ad29a7ca43ea90a2d863fe3056e86a/six-1.11.0-py2.py3-none-any.whl
+Installing collected packages: tabulate, MarkupSafe, jinja2, Click, PyYAML, pymongo, configparser, futures, jmespath, six, python-dateutil, docutils, botocore, s3transfer, boto3, stackility, smmap2, gitdb2, GitPython, Mako, lambdatool
+Successfully installed Click-6.7 GitPython-2.1.9 Mako-1.0.7 MarkupSafe-1.0 PyYAML-3.12 boto3-1.7.6 botocore-1.10.6 configparser-3.5.0 docutils-0.14 futures-3.2.0 gitdb2-2.0.3 jinja2-2.10 jmespath-0.9.3 lambdatool-0.4.0 pymongo-3.6.1 python-dateutil-2.7.2 s3transfer-0.1.13 six-1.11.0 smmap2-2.0.3 stackility-0.5.3 tabulate-0.8.2
+=== STARTING THE VPC ===========================================================
+{
+  "dryrun": false, 
+  "parameters": {
+    "routeTableName": "default-demo-rt", 
+    "azOne": "us-east-2a", 
+    "theCIDR": "10.10.0.0/16", 
+    "IGWname": "demo-igw", 
+    "azTwo": "us-east-2b", 
+    "subnetCIDRTwo": "10.10.11.0/24", 
+    "subnetCIDROne": "10.10.10.0/24"
+  }, 
+  "codeVersion": "1524488851", 
+  "tags": {
+    "Name": "demo-vpc"
+  }, 
+  "no_poll": false, 
+  "environment": {
+    "profile": "demo", 
+    "stack_name": "demo-vpc", 
+    "region": "us-east-2", 
+    "bucket": "cmrsol-artifacts-us-east-2", 
+    "template": "template.json"
+  }, 
+  "yaml": false
+}
+
+The following resources were created:
+Resource Type                          Logical ID                  Physical ID
+-------------------------------------  --------------------------  --------------------------
+AWS::EC2::Route                        routeToUncleAlsInternet     demo-route-VMOUCIOBHI8U
+AWS::EC2::SubnetRouteTableAssociation  subnetOneRoute              rtbassoc-5e058035
+AWS::EC2::SubnetRouteTableAssociation  subnetTwoRoute              rtbassoc-b478fddf
+AWS::EC2::InternetGateway              theInternetGateway          igw-0b48a363
+AWS::EC2::RouteTable                   theRouteTable               rtb-fa644892
+AWS::EC2::SecurityGroup                theSshSecurityGroup         sg-97e7e8fc
+AWS::EC2::SecurityGroupIngress         theSshSecurityGroupIngress  theSshSecurityGroupIngress
+AWS::EC2::Subnet                       theSubnetOne                subnet-4ec5a226
+AWS::EC2::Subnet                       theSubnetTwo                subnet-02b26d78
+AWS::EC2::VPC                          theVPC                      vpc-60593008
+AWS::EC2::VPCGatewayAttachment         vpcIgwAssociation           demo-vpcIg-FTL2C87EG1HO
+=== STARTING THE IAM ROLES =====================================================
+{
+  "dryrun": false, 
+  "parameters": {
+    "roleName": "demo-ec2-v1", 
+    "managedPolicies": "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess,arn:aws:iam::aws:policy/IAMUserChangePassword,arn:aws:iam::aws:policy/AmazonEC2FullAccess,arn:aws:iam::aws:policy/IAMReadOnlyAccess,arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+  }, 
+  "codeVersion": "1524488944", 
+  "tags": {
+    "Name": "demo-role"
+  }, 
+  "no_poll": false, 
+  "environment": {
+    "profile": "demo", 
+    "stack_name": "demo-iam-role", 
+    "region": "us-east-2", 
+    "bucket": "cmrsol-artifacts-us-east-2", 
+    "template": "template.json"
+  }, 
+  "yaml": false
+}
+
+The following resources were created:
+Resource Type              Logical ID              Physical ID
+-------------------------  ----------------------  -------------
+AWS::IAM::InstanceProfile  demoEC2InstanceProfile  demo-ec2-v1
+AWS::IAM::Role             demoEC2Role             demo-ec2-v1
+=== STARTING THE EC2 MACHINE ===================================================
+{
+  "dryrun": false, 
+  "parameters": {
+    "machineName": "scruffy", 
+    "machineImage": "ami-916f59f4", 
+    "ec2Key": "id_rsa", 
+    "instanceType": "t2.nano"
+  }, 
+  "codeVersion": "1524489098", 
+  "tags": {
+    "Name": "demo-machine"
+  }, 
+  "no_poll": false, 
+  "environment": {
+    "profile": "demo", 
+    "stack_name": "demo-machine", 
+    "region": "us-east-2", 
+    "bucket": "cmrsol-artifacts-us-east-2", 
+    "template": "template.json"
+  }, 
+  "yaml": false
+}
+
+The following resources were created:
+Resource Type             Logical ID           Physical ID
+------------------------  -------------------  -------------------
+AWS::EC2::Instance        demoSSH              i-0905e9804738b6b4f
+AWS::EC2::EIP             demoSSHaddress       18.216.157.161
+AWS::EC2::EIPAssociation  demoSSHaddressAssoc  eipassoc-3bf62bc7
+=== STARTING THE APPLICATION SECURITY GROUP ====================================
+{
+  "dryrun": false, 
+  "codeVersion": "1524489161", 
+  "tags": {
+    "Name": "demo-default-sg"
+  }, 
+  "no_poll": false, 
+  "environment": {
+    "profile": "demo", 
+    "stack_name": "demo-default-sg", 
+    "region": "us-east-2", 
+    "bucket": "cmrsol-artifacts-us-east-2", 
+    "template": "template.json"
+  }, 
+  "yaml": false
+}
+Traceback (most recent call last):
+  File "/tmp/1524488844/local/lib/python2.7/site-packages/stackility/CloudStackUtility.py", line 328, in _fill_defaults
+    parms = self._template['Parameters']
+KeyError: 'Parameters'
+
+The following resources were created:
+Resource Type                   Logical ID         Physical ID
+------------------------------  -----------------  ---------------------------------------------
+AWS::EC2::SecurityGroupEgress   demoGroupEgress    demo-default-sg-demoGroupEgress-1PEJ830N81IBS
+AWS::EC2::SecurityGroupIngress  demoGroupIngress   demoGroupIngress
+AWS::EC2::SecurityGroup         demoSecurityGroup  sg-0fe3ec64
+=== STARTING THE S3 BUCKET TO HOLD THE DATA ====================================
+{
+  "dryrun": false, 
+  "parameters": {
+    "bucketName": "cmrsol-devops-demo"
+  }, 
+  "codeVersion": "1524489193", 
+  "tags": {
+    "Name": "demo-s3-bucket"
+  }, 
+  "no_poll": false, 
+  "environment": {
+    "profile": "demo", 
+    "stack_name": "demo-s3-bucket", 
+    "region": "us-east-2", 
+    "bucket": "cmrsol-artifacts-us-east-2", 
+    "template": "template.json"
+  }, 
+  "yaml": false
+}
+
+The following resources were created:
+Resource Type          Logical ID      Physical ID
+---------------------  --------------  -------------------------------------------
+AWS::S3::Bucket        Bucket          cmrsol-devops-demo
+AWS::S3::BucketPolicy  S3BucketPolicy  demo-s3-bucket-S3BucketPolicy-1T88EG3C7L1UV
+AWS::EC2::VPCEndpoint  demoS3Endpoint  vpce-4ae72323
+=== STARTING THE API GATEWAY / LAMBDA FUNCTION =================================
+
+The following resources were created:
+	AWS::Lambda::Permission	APIGPermission	demo-lambda-urltool-APIGPermission-QU56JZU7W4HZ
+	AWS::Lambda::Function	LambdaFunction	urltool-demo
+	AWS::ApiGateway::RestApi	theAPI	7umikj9zgc
+	AWS::ApiGateway::Deployment	theDeployment	q6r1vt
+
+The deployed service can be found at this URL:
+	https://7umikj9zgc.execute-api.us-east-2.amazonaws.com/demo
+
+================================================================================
